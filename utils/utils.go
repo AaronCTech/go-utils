@@ -1,6 +1,8 @@
 package utils
 
 import (
+	"crypto/rand"
+	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -41,3 +43,14 @@ func PrepResponseWriter(w http.ResponseWriter, data []byte) http.ResponseWriter 
 	return w
 }
 
+//GenerateUUID generates a very basic UUID
+func GenerateUUID() string {
+
+	b := make([]byte, 16)
+	_, err := rand.Read(b)
+	if err != nil {
+		return ""
+	}
+
+	return fmt.Sprintf("%X-%X-%X-%X-%X", b[0:4], b[4:6], b[6:8], b[8:10], b[10:])
+}
