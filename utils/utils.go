@@ -43,9 +43,17 @@ func PrepResponseWriter(w http.ResponseWriter, data []byte) http.ResponseWriter 
 	return w
 }
 
+//PrepErrorResponse returns a server error
+func PrepErrorResponse(w http.ResponseWriter, code int, data string) http.ResponseWriter {
+	w.Header().Set("Content-Type", "text/plain")
+	w.WriteHeader(code)
+	w.Write([]byte(data))
+
+	return w
+}
+
 //GenerateUUID generates a very basic UUID
 func GenerateUUID() string {
-
 	b := make([]byte, 16)
 	_, err := rand.Read(b)
 	if err != nil {
