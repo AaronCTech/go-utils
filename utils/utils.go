@@ -35,12 +35,10 @@ func TimeTrack(start time.Time, name string) {
 }
 
 //PrepResponseWriter prepares a successful response to be returned
-func PrepResponseWriter(w http.ResponseWriter, data []byte) http.ResponseWriter {
+func PrepResponseWriter(w http.ResponseWriter, data []byte) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(200)
 	w.Write(data)
-
-	return w
 }
 
 //PrepErrorResponse returns a server error
