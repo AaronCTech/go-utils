@@ -48,7 +48,12 @@ func PrepErrorResponse(w http.ResponseWriter, err error, code int, data string) 
 
 		w.Header().Set("Content-Type", "text/plain")
 		w.WriteHeader(code)
-		w.Write([]byte(data))
+
+		if data == "" {
+			w.Write([]byte(err.Error()))
+		} else {
+			w.Write([]byte(data))
+		}
 	}
 
 	return err
